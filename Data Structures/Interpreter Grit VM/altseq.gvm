@@ -1,0 +1,44 @@
+# A program that calculates a (-2)^n * 3 + 4 for a given n (only n > 1)
+# Memory Layout:
+#   0: N        (Provided with initialMemory);
+#   1: Result   (Output of program)
+#   2: j        (Used for iteration)
+
+# Check the memory has at least one space (for N), clear the accumulator
+CHECKMEM 1
+CLEAR
+
+# Set the values for the Result and set j = to 1
+ADDCONST 1
+INSERT 1
+INSERT 2
+
+# Grab N and check if j is greater than N (one greater than)
+AT 0
+ADDCONST 1
+SUBMEM 2
+
+# If N is still greater than j keep doing the exp, otherwise we jump to the constants
+JUMPNZERO 2
+JUMPZERO 9
+
+# Get current value, multiply by -2, put it back, increment j, jump back to check if we are done
+CLEAR
+AT 1 
+MULCONST -2
+SET 1
+AT 2
+ADDCONST 1
+SET 2
+JUMPREL -12
+
+# Multiply by 3
+AT 1
+MULCONST 3
+
+# Add 4
+ADDCONST 4
+SET 1
+
+# End Program
+HALT

@@ -1,0 +1,54 @@
+# Test Program for functions of the GritVM
+# Requires 1 memory location with some int
+
+# Check memory, clear the accumulator
+CHECKMEM 1
+CLEAR
+
+# Make the number 35
+ADDCONST 50
+SUBCONST 5
+MULCONST 7
+DIVCONST 9
+
+# Make that 35 around the 10 in 0, resulting in [35, N, 35]
+INSERT 0
+INSERT 2
+
+# Add 4 to our 0 memory location, insert 3 into location 3, and 
+ADDCONST 4
+SET 0
+CLEAR
+ADDCONST 3
+INSERT 3
+
+# Use that 3 and do some maths
+AT 0
+DIVMEM 3
+ADDMEM 0
+SUBMEM 2
+MULMEM 3
+
+# Erase location 3 and set location 2 to 5
+ERASE 3
+CLEAR
+ADDCONST 5
+SET 2
+
+# While Location 2 is not zero, times location 2 by 2
+AT 2
+SUBCONST 1
+SET 2
+JUMPZERO 5# TO THE END
+AT 0
+MULCONST 2
+SET 0
+JUMPREL -7
+
+# This jump should not happen
+JUMPNZERO 2
+HALT
+
+SET 0
+SET 1
+SET 2

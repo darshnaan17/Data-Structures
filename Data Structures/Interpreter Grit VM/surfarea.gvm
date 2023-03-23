@@ -1,0 +1,43 @@
+# A program that calculates the surface area of a rectangular prism (A = 2(w*l+h*l+h*w))
+# Input Memory Layout:
+#   0: L        (Provided with initialMemory)
+#   1: W        (Provided with initialMemory)
+#   2: H        (Provided with initialMemory)
+# Output Memory Layout:
+#   0 Result   (Output of program)
+
+# Check the memory has at least three space (for N), clear the accumulator
+CHECKMEM 3
+CLEAR
+
+# W * L
+AT 1
+MULMEM 0
+INSERT 3
+
+# H * L
+AT 2
+MULMEM 0
+INSERT 4
+
+# H * W
+AT 2
+MULMEM 1
+INSERT 5
+
+# Sum the results
+CLEAR
+ADDMEM 3
+ADDMEM 4
+ADDMEM 5
+
+# # Distribute the 2 
+MULCONST 2
+SET 3
+
+# Clean Up
+ERASE 4
+ERASE 4
+ERASE 0
+ERASE 0
+ERASE 0

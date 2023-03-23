@@ -1,0 +1,38 @@
+# A simple program that calculates a sums from 1 to N
+# Memory Layout:
+#   0: N      (Provided with initialMemory);
+#   1: Sum    (Output of program)
+#   2: j      (Used for iteration)
+
+# Check the memory has at least one space (for N), clear the accumulator
+CHECKMEM 1
+CLEAR
+
+# Check to see if N is zero and halt if it is
+INSERT 1
+AT 0
+JUMPNZERO 2
+HALT
+
+# Set j = 1
+CLEAR
+ADDCONST 1
+INSERT 2
+
+# Grab N and check if j is greater than N (one greater than)
+AT 0
+ADDCONST 1
+SUBMEM 2
+JUMPNZERO 2
+HALT
+
+# Do the actual summing
+AT 1
+ADDMEM 2
+SET 1
+
+# Jump Back after incrementing j
+AT 2
+ADDCONST 1
+SET 2
+JUMPREL -11
